@@ -1,0 +1,11 @@
+<testsuite>
+    <testcase name="Custom test name containing spaces" classname="example.DisplayNameDemo" time="0">
+        <!--Unique ID: [engine:junit5]/[class:example.DisplayNameDemo]/[method:testWithDisplayNameContainingSpaces()]-->
+    </testcase>
+    <testcase name="╯°□°）╯" classname="example.DisplayNameDemo" time="0">
+        <!--Unique ID: [engine:junit5]/[class:example.DisplayNameDemo]/[method:testWithDisplayNameContainingSpecialCharacters()]-->
+    </testcase>
+    <testcase name="😱" classname="example.DisplayNameDemo" time="0">
+        <!--Unique ID: [engine:junit5]/[class:example.DisplayNameDemo]/[method:testWithDisplayNameContainingEmoji()]-->
+    </testcase>
+</testsuite>

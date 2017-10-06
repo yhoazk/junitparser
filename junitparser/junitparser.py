@@ -30,6 +30,8 @@ try:
 except NameError:
     unicode = lambda s: str(s)
 
+parser = etree.XMLParser(remove_comments=False)
+
 def write_xml(obj, filepath=None, pretty=False):
     tree = etree.ElementTree(obj._elem)
     if filepath is None:
@@ -171,6 +173,9 @@ class Element(with_metaclass(junitxml, object)):
         "Converts element to XML string."
         return etree.tostring(self._elem, encoding='utf-8')
 
+    def text(self):
+        return self._elem.text
+
 
 class JUnitXml(Element):
     _tag = 'testsuites'
@@ -224,7 +229,7 @@ class JUnitXml(Element):
 
     @classmethod
     def fromfile(cls, filepath):
-        tree = etree.parse(filepath)
+        tree = etree.parse(filepath, parser=parser)
         root_elem = tree.getroot()
         if root_elem.tag == 'testsuites':
             instance = cls()
@@ -534,6 +539,14 @@ class TestCase(Element):
 
     def update_statistics(self):
         pass
+
+    def comments(self):
+        "JUnit 5 adds Unique ID to testcase as comments"
+        children = self._elem.getchildren()
+        if children:
+            return children[0].text
+        else:
+            return ''
 
 
 class System(Element):
