@@ -30,6 +30,7 @@ try:
 except NameError:
     unicode = lambda s: str(s)
 
+
 def write_xml(obj, filepath=None, pretty=False):
     tree = etree.ElementTree(obj._elem)
     if filepath is None:
@@ -74,10 +75,11 @@ class IntAttr(Attr):
         result = super(IntAttr, self).__get__(instance, cls)
         if result is None and \
             (isinstance(instance, JUnitXml) or 
-            isinstance(instance, TestSuite)):
+             isinstance(instance, TestSuite)):
             instance.update_statistics()
             result = super(IntAttr, self).__get__(instance, cls)
         return int(result) if result else None
+
     def __set__(self, instance, value):
         if not isinstance(value, int):
             raise TypeError("Expected integer value.")
@@ -90,10 +92,11 @@ class FloatAttr(Attr):
         result = super(FloatAttr, self).__get__(instance, cls)
         if result is None and \
             (isinstance(instance, JUnitXml) or 
-            isinstance(instance, TestSuite)):
+             isinstance(instance, TestSuite)):
             instance.update_statistics()
             result = super(FloatAttr, self).__get__(instance, cls)
         return float(result) if result else None
+
     def __set__(self, instance, value):
         if not (isinstance(value, float) or isinstance(value, int)):
             raise TypeError("Expected float value.")

@@ -440,6 +440,13 @@ class Test_TestSuite(unittest.TestCase):
         suite2.add_property('name2', 'value2')
         self.assertNotEqual(suite, suite2)
 
+    def test_suite_ne_2(self):
+        suite = TestSuite()
+        suite.add_property('name1', 'value1')
+        suite2 = deepcopy(suite)
+        suite2.add_property('name1', 'value1')
+        suite2.add_property('name2', 'value2')
+        self.assertNotEqual(suite, suite2)
 
 class Test_TestCase(unittest.TestCase):
 
