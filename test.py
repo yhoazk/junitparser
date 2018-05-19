@@ -379,6 +379,12 @@ class Test_TestSuite(unittest.TestCase):
         self.assertEqual(res_prop.name, 'name1')
         self.assertEqual(res_prop.value, 'value1')
 
+    def test_add_attribute(self):
+        TestSuite.float = FloatAttr("floatie")
+        suite = TestSuite()
+        suite.float = 3.5
+        self.assertEqual(suite.float, 3.5)
+
     def test_remove_case(self):
         suite = TestSuite()
         case1 = TestCase()
