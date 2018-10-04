@@ -13,5 +13,5 @@ from .junitparser import (
     IntAttr,
     FloatAttr,
 )
-
+print("From fir")
 __version__ = "1.2.1"

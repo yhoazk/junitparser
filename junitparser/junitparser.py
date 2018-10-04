@@ -161,14 +161,19 @@ class Element(with_metaclass(junitxml, object)):
             return
         instance = cls()
         if isinstance(elem, Element):
+            print("is instance")
             instance._elem = elem._elem
         else:
+            print("Why Testcase is NOT instance" + str(type(elem)))
             instance._elem = elem
+        print("Returning: {}".format(type(instance)))
         return instance
 
     def iterchildren(self, Child):
         "Iterate through specified Child type elements."
+        print("Iterate through: {}".format(Child._tag))
         elems = self._elem.iterfind(Child._tag)
+        print(type(elems))
         for elem in elems:
             yield Child.fromelem(elem)
 
@@ -198,6 +203,7 @@ class JUnitXml(Element):
 
     def __init__(self, name=None):
         super(JUnitXml, self).__init__(self._tag)
+        print("from file")
         self.filepath = None
         self.name = name
 
@@ -243,8 +249,10 @@ class JUnitXml(Element):
         tree = etree.parse(filepath)
         root_elem = tree.getroot()
         if root_elem.tag == "testsuites":
+            print("testsuitessss")
             instance = cls()
         elif root_elem.tag == "testsuite":
+            print("testsuittttttt")
             instance = TestSuite()
         else:
             raise JUnitXmlError("Invalid format.")
@@ -273,6 +281,7 @@ class TestSuite(Element):
         self.filepath = None
 
     def __iter__(self):
+        print("Iterable")
         return super(TestSuite, self).iterchildren(TestCase)
 
     def __len__(self):
